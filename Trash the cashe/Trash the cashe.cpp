@@ -3,14 +3,33 @@
 
 #include <iostream>
 #include <chrono>
-#include <string>
+#include <string> 
 
 using namespace std::chrono;
+
+struct Transform
+{
+	float matrix[16]
+	{
+		1, 0, 0, 0,
+		0, 1, 0, 0,
+		0, 0, 1, 0,
+		0, 0, 0, 1 };
+};
+
+
+class GameObject3D
+{
+public:
+	Transform* transform{};
+	int id{};
+};
+
 int main()
 {
 
-	constexpr unsigned int arrSize = 2'000'000'000;
-	int* arr = new int[arrSize];
+	constexpr unsigned int arrSize = 1'000'000'00;
+	GameObject3D* arr = new GameObject3D[arrSize]{};
 
 	for (int steps = 1; steps < 1024; steps *= 2)
 	{
@@ -18,14 +37,14 @@ int main()
 
 		for (int i = 0; i < arrSize; i += steps)
 		{
-			arr[i] *= 2;
+			arr[i].id *= 2;
 		}
-		
+
 		auto end = high_resolution_clock::now();
 
 		auto elapsed = duration_cast<milliseconds>(end - start);
 
-		std::cout << "operation took" << elapsed.count() << "ms" << std::endl;
+		std::cout << "operation took " << elapsed.count() << "ms" << std::endl;
 	}
 }
 
