@@ -3,8 +3,6 @@
 
 #include <iostream>
 #include <chrono>
-#include <string>
-#include <vector>
 
 using namespace std::chrono;
 
@@ -48,7 +46,7 @@ void MeasureInts()
 
 		for (unsigned int i = 0; i < arrSize; i += steps)
 		{
-			arr[i] *= 2;
+			arr[i].id *= 2;
 		}
 
 		auto end = high_resolution_clock::now();
